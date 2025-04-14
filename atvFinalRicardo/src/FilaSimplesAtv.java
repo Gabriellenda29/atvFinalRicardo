@@ -10,7 +10,6 @@ public class FilaSimplesAtv implements IEstruturaSimples {
     }
 
     @Override
-
     //certo
     public void inserirElemento(Object valor) {
         for (int i = 0; i < tamanho; i++) {
@@ -26,6 +25,11 @@ public class FilaSimplesAtv implements IEstruturaSimples {
     @Override
     //certo
     public void inserirElementoIndice(Object valor, int indice) {
+        if (indice < 0 || indice >= tamanho) {
+            System.out.println("Índice invalido");
+            return;
+        }
+
         for(int i = 0; i < tamanho; i++) {
             if(this.fila[indice] == null) {
                 this.fila[indice] = (Integer) valor;
@@ -92,35 +96,39 @@ public class FilaSimplesAtv implements IEstruturaSimples {
             return;
         }
 
+        boolean achou = false;
+
         for (int i = 0; i < tamanho; i++) {
             if (this.fila[i] != null && this.fila[i].equals(valor)) {
                 this.fila[i] = null;
                 System.out.println("Valor removido[" + i + "]: " + valor);
-                System.out.println("Fila Agora:");
-                exibir();
-                break;
-            }else{
-                System.out.println("Valor inválido");
-                break;
+                achou = true;
             }
         }
 
+        if (!achou) {
+            System.out.println("Valor não encontrado na fila: " + valor);
+        } else {
+            System.out.println("Fila Agora:");
+            exibir();
+        }
     }
 
     @Override
     //certo
     public void removerTodasOcorrencias(Object valor) {
+        boolean encontrou = false;
 
         for (int i = 0; i < tamanho; i++) {
-            if(this.fila[i] == valor && this.fila[i] != null) {
+            if (this.fila[i] != null && this.fila[i].equals(valor)) {
                 this.fila[i] = null;
+                encontrou = true;
             }
         }
 
-        if (!buscarElemento(valor)) {
+        if (!encontrou) {
             System.out.println("Nenhum elemento para remover");
         }
-
     }
 
     @Override

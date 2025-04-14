@@ -3,9 +3,11 @@ import java.util.Scanner;
 public class MainFilaSimples {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        FilaSimplesAtv fila = new FilaSimplesAtv(5);
+        FilaSimplesAtv fila = new FilaSimplesAtv(4);
 
         int opcao,vlr;
+        String resp = "";
+        String resp2 = "";
 
 
         do {
@@ -15,7 +17,7 @@ public class MainFilaSimples {
             System.out.println("3. Inserir Sequência");
             System.out.println("4. Remover Primeiro Elemento");
             System.out.println("5. Remover por Índice");
-            System.out.println("6. Remover Primeira Ocorrência");
+            System.out.println("6. Remover Sequencia");
             System.out.println("7. Remover Todas Ocorrências");
             System.out.println("8. Buscar Elemento");
             System.out.println("9. Buscar por Índice");
@@ -51,11 +53,12 @@ public class MainFilaSimples {
                     fila.inserirElementoIndice(valor, indice);
                     break;
                 case 3:
-                    System.out.print("Digite o valor: ");
-                    vlr = scanner.nextInt();
-                    fila.inserirSequencia(vlr);
-                    scanner.nextLine();
-                    break;
+                    while(!resp.equalsIgnoreCase("n")){
+                        System.out.println("coloque numero");
+                        int num = scanner.nextInt();
+                        fila.inserirSequencia(num);
+                        System.out.println("De novo? (s/n)");
+                        resp = scanner.next();}
                 case 4:
                     fila.removerElemento();
                     break;
@@ -66,11 +69,13 @@ public class MainFilaSimples {
                     scanner.nextLine();
                     break;
                 case 6:
-                    System.out.print("Digite o valor: ");
-                    vlr = scanner.nextInt();
-                    fila.removerSequencia(vlr);
-                    scanner.nextLine();
-                    break;
+                    while (!resp2.equalsIgnoreCase("n")) {
+                        System.out.println("Coloque um número");
+                        int num = scanner.nextInt();
+                        fila.removerSequencia(num);
+                        System.out.println("De novo? (s/n)");
+                        resp2 = scanner.next();
+                    }
                 case 7:
                     System.out.print("Digite o valor: ");
                     vlr = scanner.nextInt();
@@ -91,9 +96,11 @@ public class MainFilaSimples {
                     break;
                 case 10:
                     fila.ordenarCrescente();
+                    fila.exibir();
                     break;
                 case 11:
                     fila.ordenarDecrescente();
+                    fila.exibir();
                     break;
                 case 12:
                     System.out.println("Fila cheia? ");
