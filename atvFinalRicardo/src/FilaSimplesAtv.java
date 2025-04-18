@@ -96,22 +96,24 @@ public class FilaSimplesAtv implements IEstruturaSimples {
             return;
         }
 
-        boolean achou = false;
+        int quantidade = (int) valor;
+
+        if (quantidade <= 0) {
+            System.out.println("Quantidade inválida para remoção.");
+            return;
+        }
+
+        int cont = 0;
 
         for (int i = 0; i < tamanho; i++) {
-            if (this.fila[i] != null && this.fila[i].equals(valor)) {
-                this.fila[i] = null;
-                System.out.println("Valor removido[" + i + "]: " + valor);
-                achou = true;
+            if (fila[i] != null) {
+                System.out.println("Valor removido [" + i + "]: " + fila[i]);
+                fila[i] = null;
+                cont++;
             }
+            if (cont == quantidade) break;
         }
 
-        if (!achou) {
-            System.out.println("Valor não encontrado na fila: " + valor);
-        } else {
-            System.out.println("Fila Agora:");
-            exibir();
-        }
     }
 
     @Override
@@ -157,7 +159,7 @@ public class FilaSimplesAtv implements IEstruturaSimples {
     //certo
     public boolean buscarElemento(Object valor) {
         for (int i = 0; i < tamanho; i++) {
-            if(this.fila[i] == valor) {
+            if (this.fila[i] == valor) {
                 return true;
             }
         }
@@ -236,11 +238,12 @@ public class FilaSimplesAtv implements IEstruturaSimples {
         Integer[] fila2 = new Integer[tamanhox2];
 
         if(estaVazia()) {
-            System.out.println("Não é possóvel aumentar a capacidade. Fila vazia");
+            System.out.println("Não é possível aumentar a capacidade. Fila vazia");
         }else {
             for (int i = 0; i < tamanho; i++) {
                 fila2[i] = this.fila[i];
             }
+            System.out.println("Nova capacidade da lista: " + tamanhox2);
         }
 
         this.fila = fila2;
@@ -253,7 +256,7 @@ public class FilaSimplesAtv implements IEstruturaSimples {
         if(buscarElemento(elementoAntigo)) {
             for (int i = 0; i < tamanho; i++) {
                 if(this.fila[i] == elementoAntigo) {
-                    fila[i] = (Integer) elementoNovo;
+                    this.fila[i] = (Integer) elementoNovo;
                     System.out.println("Elemento na posição [" + i + "] alterado para: " + elementoNovo);
                 }
             }
@@ -267,17 +270,12 @@ public class FilaSimplesAtv implements IEstruturaSimples {
     @Override
     //certo
     public void limpar() {
-        if(this.fila[0] != null) {
             for (int i = 0; i < tamanho; i++) {
                 if(this.fila[i] != null) {
                     this.fila[i] = null;
                 }
             }
-        }
-        else{
             System.out.println("Fila já está vazia");
-        }
-
     }
 
     @Override
